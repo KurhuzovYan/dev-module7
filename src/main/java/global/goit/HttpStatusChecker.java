@@ -22,9 +22,4 @@ public class HttpStatusChecker {
         }
         return String.format("https://http.cat/%s.jpg", code);
     }
-
-    public static void main(String[] args) {
-        HttpStatusChecker checker = new HttpStatusChecker();
-        System.out.println(checker.getStatusImage(2000));
-    }
 }
