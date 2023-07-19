@@ -1,10 +1,14 @@
 package global.goit;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class HttpStatusImageDownloader {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(HttpStatusImageDownloader.class);
 
     void downloadStatusImage(int code) {
         try {
@@ -16,10 +20,8 @@ public class HttpStatusImageDownloader {
             while ((i = inputStream.read()) != -1) {
                 outputStream.write(i);
             }
-        } catch (MalformedURLException e) {
-            throw new RuntimeException("Error = ", e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (IOException ee) {
+            LOGGER.error("Error = " , ee);
         }
     }
 }

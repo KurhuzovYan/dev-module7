@@ -1,10 +1,15 @@
 package global.goit;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class HttpStatusChecker {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(HttpStatusChecker.class);
 
     public String getStatusImage(int code) {
         try {
@@ -13,10 +18,10 @@ public class HttpStatusChecker {
             connection.setRequestMethod("GET");
             connection.connect();
             if (connection.getResponseCode() == 404) {
-                throw new IllegalArgumentException("404");
+                LOGGER.error("Error 404! Please enter correct status code:");
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            LOGGER.error("Error = ", e);
         }
         return String.format("https://http.cat/%s.jpg", code);
     }
