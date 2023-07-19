@@ -8,7 +8,6 @@ import java.net.*;
 public class HttpStatusChecker {
 
     public String getStatusImage(int code) {
-        BasicConfigurator.configure();
         try {
             URL url = new URL(String.format("https://http.cat/%s.jpg", code));
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
