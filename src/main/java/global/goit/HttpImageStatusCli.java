@@ -12,11 +12,10 @@ public class HttpImageStatusCli {
     void askStatus() {
         BasicConfigurator.configure();
         HttpStatusImageDownloader downloader = new HttpStatusImageDownloader();
+        Scanner scanner = new Scanner(System.in);
+        String s = scanner.nextLine();
         while (true) {
             LOGGER.info("Enter HTTP status code:");
-            Scanner scanner = new Scanner(System.in);
-            String s = scanner.nextLine();
-
             if (!s.matches("\\d+")) {
                 LOGGER.info("Please enter a valid number!");
                 continue;
