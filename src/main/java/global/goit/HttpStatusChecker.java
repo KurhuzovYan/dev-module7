@@ -1,20 +1,22 @@
 package global.goit;
 
-import java.util.List;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class HttpStatusChecker {
 
     public String getStatusImage(int code) {
-        List<Integer> statusCodes = List.of(
-                100, 101, 102, 103,
-                200, 201, 202, 203, 204,
-                300, 301, 302, 303, 304, 305,
-                400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414,
-                415, 416, 417, 418, 419, 420, 421, 422, 423, 424, 425, 426, 427, 428, 429,
-                500, 501, 502, 503, 504, 505, 506, 507, 508, 509, 510, 511
-        );
-        if (!statusCodes.contains(code)) {
-            throw new IllegalArgumentException("404");
+        try {
+            URL url = new URL(String.format("https://http.cat/%s.jpg", code));
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.connect();
+            if (connection.getResponseCode() == 404) {
+                throw new IllegalArgumentException("404");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         return String.format("https://http.cat/%s.jpg", code);
     }
