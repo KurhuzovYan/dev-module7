@@ -1,7 +1,5 @@
 package global.goit;
 
-import org.apache.log4j.BasicConfigurator;
-
 import java.io.IOException;
 import java.net.*;
 
@@ -17,7 +15,7 @@ public class HttpStatusChecker {
                 throw new IllegalArgumentException();
             }
         } catch (IOException e) {
-            throw new RuntimeException("Error = ", e);
+            throw new RuntimeException();
         }
         return String.format("https://http.cat/%s.jpg", code);
     }

@@ -21,7 +21,7 @@ public class HttpStatusImageDownloader {
                 outputStream.write(i);
             }
         } catch (IOException ee) {
-            LOGGER.error("Error = " , ee);
+            throw new RuntimeException();
         }
     }
 }
