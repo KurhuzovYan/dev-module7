@@ -12,19 +12,22 @@ public class HttpImageStatusCli {
     void askStatus() {
         BasicConfigurator.configure();
         HttpStatusImageDownloader downloader = new HttpStatusImageDownloader();
-        Scanner scanner = new Scanner(System.in);
-        String s = scanner.nextLine();
-        while (true) {
-            LOGGER.info("Enter HTTP status code:");
-            if (!s.matches("\\d+")) {
-                LOGGER.info("Please enter a valid number!");
-                continue;
-            }
-            try {
-                downloader.downloadStatusImage(Integer.parseInt(s));
-            } catch (Exception e) {
-                LOGGER.error(String.format("There is not image for HTTP status %s", s));
+        try (Scanner scanner = new Scanner(System.in)) {
+            String s = scanner.nextLine();
+            while (true) {
+                LOGGER.info("Enter HTTP status code:");
+                if (!s.matches("\\d+")) {
+                    LOGGER.info("Please enter a valid number!");
+                    continue;
+                }
+                try {
+                    downloader.downloadStatusImage(Integer.parseInt(s));
+                } catch (Exception e) {
+                    LOGGER.error(String.format("There is not image for HTTP status %s", s));
+                }
             }
         }
     }
 }
+
+
