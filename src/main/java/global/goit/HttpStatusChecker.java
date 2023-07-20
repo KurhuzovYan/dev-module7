@@ -14,7 +14,7 @@ public class HttpStatusChecker {
             connection.setRequestMethod("GET");
             connection.connect();
             if (connection.getResponseCode() == 404) {
-                throw new IllegalArgumentException("Error 404! Please give correct status code!");
+                throw new IllegalArgumentException();
             }
         } catch (IOException e) {
             throw new RuntimeException("Error = ", e);
